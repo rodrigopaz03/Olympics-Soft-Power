@@ -321,3 +321,14 @@
 .gr-reveal > .gr-entry__text {
   width: 100%;
 }
+
+/* Hyperlink credits on images */
+.gr-entry__img a {
+  display: block;
+  line-height: 0;
+}
+.gr-entry__img a img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
