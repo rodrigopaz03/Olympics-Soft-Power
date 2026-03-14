@@ -32,9 +32,9 @@
     { id: "moscow", label: "Moscú",             year: "1980",     sectionId: "scene-moscow", panelId: "panel-moscow", bridgeId: "bridge-moscow", selectors: ["path.Russian.Federation"], focus: { fx: 0.13, fy: 0.51 }, zoom: 3.5 },
     { id: "la",     label: "L.A.",        year: "1984",     sectionId: "scene-la",     panelId: "panel-la",     bridgeId: "bridge-la",     selectors: ["path.United.States"],      focus: { fx: 0.05, fy: 0.63 }, zoom: 3.5 },
     { id: "seoul",  label: "Seúl",              year: "1988",     sectionId: "scene-seoul",  panelId: "panel-seoul",  bridgeId: "bridge-seoul",  selectors: ["#KR"],                     focus: { fx: 0.40, fy: 0.20 }, zoom: 7.0 },
-    { id: "beijing",label: "Pekín",             year: "2008",     sectionId: "scene-beijing",panelId: "panel-beijing",bridgeId: "bridge-beijing",selectors: ["path.China"],              focus: { fx: 0.87, fy: 0.39 }, zoom: 3.5 },
-    { id: "sochi",  label: "Sochi",             year: "2014",     sectionId: "scene-sochi",  panelId: "panel-sochi",  bridgeId: "bridge-sochi",  selectors: ["path.Russian.Federation"], focus: { fx: 0.12, fy: 0.82 }, zoom: 4.5 },
-    { id: "paris",  label: "París",             year: "2024",     sectionId: "scene-paris",  panelId: "panel-paris",  bridgeId: null,            selectors: ["path.France"],             focus: { fx: 0.58, fy: 0.13 }, zoom: 5.5 },
+    { id: "beijing",label: "Pekín",             year: "2008",     sectionId: "scene-beijing",panelId: "panel-beijing",bridgeId: "bridge-beijing",selectors: ["path.China"],              focus: { fx: 0.62, fy: 0.22 }, zoom: 4.5 },
+    { id: "sochi",  label: "Sochi",             year: "2014",     sectionId: "scene-sochi",  panelId: "panel-sochi",  bridgeId: "bridge-sochi",  selectors: ["path.Russian.Federation"], focus: { fx: 0.20, fy: 0.75 }, zoom: 6.0 },
+    { id: "paris",  label: "París",             year: "2024",     sectionId: "scene-paris",  panelId: "panel-paris",  bridgeId: null,            selectors: ["path.France"],             focus: { fx: 0.58, fy: 0.35 }, zoom: 6.0 },
   ];
 
   function vbStr(vb) { return `${vb.x} ${vb.y} ${vb.w} ${vb.h}`; }
@@ -179,7 +179,7 @@
     return tl;
   }
 
-  // 4) BRIDGE 
+  // 4) BRIDGE — scrubbed zoom-out
   function buildBridge(svg, scene) {
     if (!scene.bridgeId) return;
     const bridge = document.getElementById(scene.bridgeId);
@@ -244,13 +244,15 @@
       SCENES.forEach((scene) => { buildZoomIn(svg, scene); buildBridge(svg, scene); });
       setupPanels(svg);
       setupGreecePanel();
-      setupRevealBlocks();  
+      setupRevealBlocks();  // activa .gr-reveal en todos los paneles
       window.addEventListener("resize", () => ScrollTrigger.refresh());
       ScrollTrigger.refresh();
     })
     .catch((err) => console.error("Scrollytelling: SVG load failed.", err));
 
-
+  // ---------------------------------------------------------------------------
+  // 7) PANEL
+  // ---------------------------------------------------------------------------
   function setupGreecePanel() {
     const panel   = document.getElementById("panel-greece");
     const scene   = document.getElementById("scene-greece");
@@ -258,6 +260,7 @@
 
     gsap.set(panel, { opacity: 0 });
 
+    // Crossfade mapa → panel al final del scene (zoom ya terminó)
     gsap.timeline({
       scrollTrigger: {
         trigger: scene,
@@ -273,6 +276,7 @@
     .to(mapBackground, { opacity: 0, ease: "power1.inOut" }, 0)
     .to(panel,         { opacity: 1, ease: "power1.inOut" }, 0);
 
+    // Restaurar mapa cuando el panel termina (para bridges siguientes)
     ScrollTrigger.create({
       trigger:  panel,
       start:    "bottom top",
@@ -280,6 +284,7 @@
       onEnterBack: () => gsap.set(mapBackground, { opacity: 0 }),
     });
 
+    // Reveal de bloques
     const blocks = panel.querySelectorAll(".gr-reveal");
     blocks.forEach((block, i) => {
       ScrollTrigger.create({
@@ -292,10 +297,12 @@
       });
     });
   }
-
+  // ---------------------------------------------------------------------------
+  // 8) REVEAL GLOBAL
+  // ---------------------------------------------------------------------------
   function setupRevealBlocks() {
     document.querySelectorAll(".gr-reveal").forEach((block, i) => {
-      
+
       if (block.closest("#panel-greece")) return;
       ScrollTrigger.create({
         trigger:  block,
