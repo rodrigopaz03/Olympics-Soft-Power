@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Espectáculo Silencioso — Soft Power Olímpico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/greece.css">
+</head>
+<body>
+
+  <!-- GATE -->
+  <section id="gate" class="gate" aria-label="Landing">
+    <div class="gate__rings" aria-hidden="true">
+      <img src="assets/images/kindpng_1500811.png" alt="" class="gate__rings-img" width="180" height="72" />
+    </div>
+    <h1 class="gate__title">EL ESPECTÁCULO SILENCIOSO</h1>
+    <h2 class="gate__subtitle">De la Propaganda Estatal a la Seducción Corporativa: Una Cronología del Soft Power Olímpico</h2>
+    <div class="gate__scroll-hint">
+      <span class="gate__arrow" aria-hidden="true">↓</span>
+      <span class="gate__scroll-text">Desplázate • Descubre el Recorrido.</span>
+    </div>
+  </section>
+
+  <div class="gate-spacer" aria-hidden="true" style="height: 100vh;"></div>
+  <div id="transition-trigger" class="transition-trigger" aria-hidden="true"></div>
+
+  <!-- FIXED MAP -->
+  <div id="map-background" class="map-background" aria-hidden="true">
+    <div class="map-inner" id="map-inner">
+      <div id="map-svg-mount" class="map-svg-mount"></div>
+    </div>
+  </div>
+
+  <!-- FIXED GREECE IMAGE — solo para crossfade mapa→Grecia.
+       Misma foto que el hero del panel. Se apaga cuando el panel
+       llega a su posición de scroll. El panel toma el relevo. -->
+  <div id="gr-img-fixed" aria-hidden="true" style="
+    position:fixed; inset:0; z-index:2;
+    opacity:0; pointer-events:none; will-change:opacity;
+  ">
+    <img src="assets/images/olympia.jpg" alt="" style="
+      width:100%; height:100%; object-fit:cover;
+      object-position:center 30%;
+      filter:saturate(0.65) brightness(0.82) contrast(1.08);
+      display:block;
+    "/>
+  </div>
+
+  <!-- City label overlay -->
+  <div class="city-label" id="city-label" aria-live="polite">
+    <span class="city-label__name" id="city-label-name">Grecia</span>
+    <span class="city-label__year" id="city-label-year">776 a.C.</span>
+  </div>
+
+  <!-- ================================================================
+       GREECE 776 B.C.
+       Structure: scroll scene → panel (hero image + infographic body)
+  ================================================================ -->
+  <section id="scene-greece" class="narrative-section" aria-label="Greece narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+
+  <section id="panel-greece" class="story-panel gr-panel" data-theme="greece" aria-label="Greece story panel">
+    <div class="story-panel__inner gr-inner">
+
+      <!-- Contenido editorial -->
+      <div class="gr-content">
+
+        <!-- Título -->
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">El Origen</p>
+          <h2 class="gr-hero__city">Grecia</h2>
+          <p class="gr-hero__year">776 a.C.</p>
+        </header>
+
+        <!-- Bloque 1: texto + imagen wrestlers -->
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Los Juegos Olímpicos surgieron como uno de los principales festivales atléticos del mundo griego antiguo, junto con los juegos Ístmicos, Nemeos y Píticos. Estos eventos reunían periódicamente a atletas provenientes de distintas <em>polis</em>, quienes competían en disciplinas como carreras, pentatlón y combates. Con el tiempo, los Juegos de Olimpia adquirieron un lugar central dentro de este sistema panhelénico, convirtiéndose en el punto de encuentro más prestigioso del calendario atlético griego. Las victorias se registraban en listas conocidas como <em>Olympionikai</em>, que preservaban la memoria de los vencedores y funcionaban también como una referencia cronológica para el mundo griego.</p>
+            <cite>Christesen · <em>Cambridge Companion to the Olympics</em>, 2007</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/greece/wrestlers.jpg" alt="Greek Wrestlers" />
+            <figcaption>Greek Wrestlers · World History Encyclopedia</figcaption>
+          </figure>
+        </div>
+
+        <!-- Bloque 2: imagen chariot + texto -->
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/greece/Chariot.jpg" alt="Greek Chariot Race" />
+            <figcaption>Greek Chariot · World History Encyclopedia</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>El significado de la victoria olímpica iba mucho más allá del reconocimiento deportivo. Los vencedores no recibían premios materiales, sino una sencilla corona de olivo conocida como <em>kotinos</em>. Aunque carecía de valor monetario, esta corona representaba uno de los mayores honores para un atleta: simbolizaba la gloria, el prestigio público y el favor de los dioses. La obtención del <em>kotinos</em> era el momento culminante de los Juegos y convertía a los vencedores en figuras admiradas dentro de todo el mundo griego.</p>
+            <cite>Karaiskakis · 2024</cite>
+          </div>
+        </div>
+
+        <!-- Bloque 3: texto + imagen olive -->
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>La elaboración y entrega de la corona formaban parte de un ritual profundamente simbólico. Los jueces —<em>Hellanodikai</em>— cortaban ramas del olivo sagrado de Olimpia con una hoz de oro y tejían las coronas que serían otorgadas a los campeones. La ceremonia tenía lugar en el santuario de Zeus, reforzando la dimensión religiosa del evento. El propio olivo tenía una fuerte carga cultural: según la mitología, había sido un regalo de Atenea a Atenas, representando sabiduría, paz y prosperidad.</p>
+            <cite>Karaiskakis · 2024</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/greece/olive.jpg" alt="Corona de Olivo Olímpica" />
+            <figcaption>Corona de Olivo · Atenas 2004</figcaption>
+          </figure>
+        </div>
+
+        <!-- Bloque 4: imagen medalla + texto -->
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/greece/medalla.jpg" alt="Primera medalla olímpica moderna" />
+            <figcaption>Primera medalla olímpica · 1896</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>Con el tiempo, el simbolismo de la victoria olímpica evolucionó, pero no desapareció. En los Juegos modernos, inaugurados en 1896, las coronas fueron reemplazadas por medallas que adoptaron el sistema actual de oro, plata y bronce. Aun así, muchos elementos simbólicos del olimpismo antiguo permanecen: la diosa Nike sigue apareciendo en las medallas y el olivo continúa presente en emblemas y ceremonias. Desde su origen, los Juegos han funcionado como un escenario para proyectar prestigio, identidad y reconocimiento ante una audiencia cada vez más amplia.</p>
+            <cite>Suddath · 2008</cite>
+          </div>
+        </div>
+
+        <!-- Cierre -->
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Desde su origen, los Juegos Olímpicos han sido más que una competición deportiva: un escenario donde proyectar prestigio, identidad y poder ante el mundo.</p>
+          <p class="gr-closing__bridge">Con la reaparición de los Juegos en la era moderna, este escenario simbólico heredado de la Grecia antigua adquirió una dimensión completamente nueva. Si en Olimpia la victoria representaba prestigio individual y honor colectivo dentro del mundo griego, en el siglo XX los Juegos comenzaron a convertirse en una plataforma internacional donde los Estados podían proyectar poder, identidad nacional e influencia política ante una audiencia global. A medida que el olimpismo crecía en alcance mediático y diplomático, los gobiernos comprendieron su potencial como herramienta de propaganda y legitimación. Esta transformación se hizo especialmente evidente en los Juegos Olímpicos de Berlín 1936, donde el régimen nazi utilizó el evento para proyectar una imagen de fortaleza, modernidad y superioridad ideológica ante el mundo.</p>
+        </div>
+
+      </div><!-- /.gr-content -->
+    </div><!-- /.story-panel__inner -->
+  </section><!-- /#panel-greece -->
+
+  <div id="bridge-greece" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== BERLIN 1936 ==================== -->
+  <section id="scene-berlin" class="narrative-section" aria-label="Berlin 1936 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-berlin" class="story-panel gr-panel" data-theme="berlin" aria-label="Berlin 1936 story panel">
+    <div class="story-panel__inner gr-inner">
+
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">Propaganda y Espectáculo</p>
+          <h2 class="gr-hero__city">Berlín</h2>
+          <p class="gr-hero__year">1936</p>
+        </header>
+
+        <!-- Bloque 1: texto + imagen apertura -->
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Los Juegos Olímpicos de Berlín de 1936 marcaron un punto de inflexión en la relación entre deporte y política. Cuando el régimen nazi llegó al poder en 1933, comprendió rápidamente el potencial del deporte como herramienta de proyección ideológica. El gobierno de Hitler reorganizó las instituciones deportivas alemanas dentro del proceso de <em>Gleichschaltung</em> —coordinación política—, integrando el deporte en la estructura del Estado y alineándolo con la ideología racial nazi. Los Juegos Olímpicos ofrecían la oportunidad única de presentar al mundo una imagen de fortaleza nacional y de supuesta superioridad "aria" a través del espectáculo deportivo.</p>
+            <cite>Cody · 2016</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/berlin/opening.jpeg" alt="Hitler en la ceremonia de inauguración" />
+            <figcaption>Ceremonia de Inauguración · Berlín 1936</figcaption>
+          </figure>
+        </div>
+
+        <!-- Bloque 2: imagen llama + texto -->
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/berlin/llama.jpg" alt="Llegada de la llama olímpica a Berlín" />
+            <figcaption>Llegada de la Llama Olímpica · Berlín 1936</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>Para lograrlo, el régimen desplegó una maquinaria propagandística sin precedentes. Las autoridades nazis invirtieron enormes recursos en la construcción de instalaciones monumentales y en la organización de unos Juegos que superaran cualquier edición anterior. La ceremonia de apertura incluyó el relevo de la antorcha desde Olimpia hasta Berlín, reforzando simbólicamente la conexión entre la Alemania nazi y la herencia de la antigua Grecia. A través de carteles, publicaciones y cobertura mediática internacional, el régimen promovió una narrativa que vinculaba el ideal atlético clásico con el mito racial de una supuesta civilización aria heredera de la cultura griega.</p>
+            <cite>United States Holocaust Memorial Museum · 2025</cite>
+          </div>
+        </div>
+
+        <!-- Bloque 3: texto + imagen Olympia -->
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>El mensaje también se amplificó mediante el cine. El régimen encargó a la cineasta Leni Riefenstahl la producción de <em>Olympia</em>, un documental que celebraba la estética del cuerpo atlético y el espectáculo de los Juegos, reforzando visualmente los ideales raciales y nacionalistas del régimen. Estas producciones, junto con una cobertura mediática controlada, transformaron los Juegos en una vitrina global del Tercer Reich, capaz de influir en la percepción internacional de Alemania.</p>
+            <cite>Cody · 2016</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/berlin/olympia.JPG" alt="Publicidad del film Olympia" />
+            <figcaption>Publicidad · Film <em>Olympia</em>, Leni Riefenstahl</figcaption>
+          </figure>
+        </div>
+
+        <!-- Cierre -->
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Los Juegos de 1936 demostraron cómo el escenario olímpico podía convertirse en una poderosa herramienta de propaganda política a escala internacional.</p>
+          <p class="gr-closing__bridge">Sin embargo, esta imagen cuidadosamente construida ocultaba una realidad muy distinta. Durante los Juegos, el régimen moderó temporalmente algunas de sus manifestaciones más visibles de antisemitismo para evitar críticas internacionales, mientras continuaba excluyendo y persiguiendo a atletas judíos. Muchos visitantes extranjeros interpretaron los Juegos como una señal de normalidad y modernidad alemana, sin percibir que la hospitalidad y el espectáculo formaban parte de una estrategia propagandística destinada a legitimar al régimen ante el mundo. Una vez finalizados los Juegos, la persecución se intensificó y las ambiciones expansionistas del régimen se hicieron cada vez más evidentes.</p>
+        </div>
+
+      </div><!-- /.gr-content -->
+    </div><!-- /.story-panel__inner -->
+  </section>
+  <div id="bridge-berlin" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== TOKYO 1964 ==================== -->
+  <section id="scene-tokyo" class="narrative-section" aria-label="Tokyo 1964 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-tokyo" class="story-panel gr-panel" data-theme="tokyo" aria-label="Tokyo 1964 story panel">
+    <div class="story-panel__inner gr-inner">
+
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">Redención y Modernidad</p>
+          <h2 class="gr-hero__city">Tokio</h2>
+          <p class="gr-hero__year">1964</p>
+        </header>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Si Berlín 1936 mostró cómo los Juegos podían utilizarse como propaganda política, Tokio 1964 representó una transformación significativa en el uso del escenario olímpico. Para Japón, los Juegos constituían mucho más que un evento deportivo: eran la primera gran oportunidad de presentarse nuevamente ante el mundo tras la devastación y el estigma internacional que dejó la Segunda Guerra Mundial. El gobierno japonés entendió que los Juegos podían servir como una plataforma para redefinir la identidad del país, proyectando una imagen de estabilidad, modernidad y cooperación internacional.</p>
+            <cite>Tagsold · 2020</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/tokyo/publicidad.jpg" alt="Publicidad oficial Tokio 1964" />
+            <figcaption>Publicidad oficial · Tokio 1964</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/tokyo/tren.jfif" alt="Shinkansen, el tren bala japonés" />
+            <figcaption>Shinkansen · inaugurado para los Juegos de 1964</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>Con este objetivo, Japón emprendió un ambicioso proceso de modernización urbana y tecnológica. El Shinkansen, la expansión del sistema de transporte y la construcción de instalaciones deportivas con arquitectura futurista fueron concebidas no solo para albergar el evento, sino también para comunicar una visión de Japón como una nación avanzada y orientada hacia el futuro. A diferencia de la propaganda explícita del régimen nazi, aquí la estrategia se basó en mostrar progreso, innovación y eficiencia como símbolos de una nueva identidad nacional.</p>
+            <cite>Tagsold · 2020</cite>
+          </div>
+        </div>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Los Juegos sirvieron también para transmitir un mensaje político más amplio: el paso de Japón de potencia militar a nación comprometida con la paz internacional. En el contexto de la Guerra Fría, el país buscó proyectarse como un actor moderado y cooperativo. Gestos simbólicos como las ceremonias relacionadas con el Hiroshima Peace Memorial y el énfasis en la reconstrucción pacífica reforzaron esta narrativa, presentando a Japón como una sociedad que había dejado atrás el militarismo y que aspiraba a liderar un futuro basado en el desarrollo tecnológico y la cooperación global.</p>
+            <cite>Honda · 2019</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/tokyo/Yoyogi.jpeg" alt="Yoyogi National Gymnasium de Kenzo Tange" />
+            <figcaption>Yoyogi National Gymnasium · Kenzo Tange, 1964</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Tokio 1964 marcó un momento clave en la evolución del uso político de los Juegos: ya no se trataba únicamente de propaganda directa, sino de una estrategia más sutil de influencia internacional basada en imagen, innovación y prestigio.</p>
+          <p class="gr-closing__bridge">Los Juegos de 1964 no solo transformaron la infraestructura y la economía del país, sino que también redefinieron su percepción internacional. Japón pasó de ser asociado con la guerra y el expansionismo a convertirse en un símbolo de modernidad tecnológica, crecimiento económico y cultura contemporánea. Lo que Tokio demostró es que el soft power olímpico podía ejercerse sin necesidad de propaganda explícita, simplemente dejando que el espectáculo hablara por sí mismo.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div id="bridge-tokyo" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== MEXICO CITY 1968 ==================== -->
+  <section id="scene-mexico" class="narrative-section" aria-label="Mexico City 1968 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-mexico" class="story-panel gr-panel" data-theme="mexico" aria-label="Mexico City 1968 story panel">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">La Vitrina y la Masacre</p>
+          <h2 class="gr-hero__city">Ciudad de México</h2>
+          <p class="gr-hero__year">1968</p>
+        </header>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Tokio 1964 mostró el uso de los Juegos para reconstruir una imagen nacional. México 1968 reveló con especial claridad el costo político de esa operación. El Estado mexicano concibió la Olimpiada como el escaparate más ambicioso del llamado "milagro mexicano": una oportunidad para exhibir a México como un país moderno, pacífico, culturalmente sofisticado y plenamente integrado al mundo desarrollado. Esa narrativa se condensó en el lema "Todo es posible en la paz", con el que el gobierno intentó proyectar una identidad de armonía, apertura y progreso.</p>
+            <cite>Castañeda · 2014</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/mexico/publicidad.jpg" alt="Publicidad oficial México 1968" />
+            <figcaption>Publicidad oficial · Ciudad de México 1968</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/mexico/carrera.jpg" alt="Carrera frente a la Catedral Metropolitana" />
+            <figcaption>Carrera olímpica · Catedral Metropolitana, Ciudad de México</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>Esa imagen no se construyó solo con discursos, sino con una maquinaria visual y urbana muy calculada. La Olimpiada incluyó una Cultural Olympiad, un sistema gráfico internacionalmente atractivo, intervenciones urbanas, arquitectura moderna y una cuidadosa selección de los espacios que debían ser vistos. El objetivo era mostrar un México moderno y cosmopolita, mientras se ocultaban las fracturas sociales y las zonas menos convenientes de la ciudad. Los Juegos funcionaron como una vitrina diseñada para volver visible un país deseado e invisible un país conflictivo.</p>
+            <cite>Castañeda · 2014</cite>
+          </div>
+        </div>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Esa escenografía coincidió con un contexto de creciente protesta social. El movimiento estudiantil de 1968 fue la culminación de años de autoritarismo, intervenciones militares en universidades y represión de movilizaciones sociales. A medida que se acercaba la inauguración y llegaban periodistas internacionales para la primera transmisión satelital de unos Juegos Olímpicos, las protestas comenzaron a amenazar directamente la imagen que el gobierno quería exportar. Diez días antes de la apertura, la matanza de Tlatelolco buscó sofocar el conflicto de un golpe para preservar, ante el mundo, la ficción de orden y paz.</p>
+            <cite>Nájar · 2023</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/mexico/contra.jpg" alt="Cartel de la revuelta estudiantil 1968" />
+            <figcaption>Cartel de la revuelta estudiantil · 1968</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">México 1968 demostró que la proyección internacional podía depender de la represión interna.</p>
+          <p class="gr-closing__bridge">Si Berlín 1936 había mostrado la Olimpiada como propaganda autoritaria directa, México 1968 mostró una variante más compleja: un lenguaje moderno, cultural y visualmente seductor, capaz de proyectar prestigio global mientras ocultaba la violencia sobre la que descansaba. No fue solo una celebración deportiva, sino una operación de imagen sostenida por diseño, arquitectura, medios y control del espacio público.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div id="bridge-mexico" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== MOSCOW 1980 ==================== -->
+  <section id="scene-moscow" class="narrative-section" aria-label="Moscow 1980 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-moscow" class="story-panel gr-panel" data-theme="moscow" aria-label="Moscow 1980 story panel">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">Boicot y Propaganda</p>
+          <h2 class="gr-hero__city">Moscú</h2>
+          <p class="gr-hero__year">1980</p>
+        </header>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Para 1980, los Juegos Olímpicos ya se habían consolidado como un escenario clave de competencia simbólica entre Estados. En plena Guerra Fría, la Olimpiada de Moscú fue concebida por la Unión Soviética como una oportunidad para demostrar la superioridad de su sistema político y social frente al mundo occidental. El deporte ocupaba un lugar central en la estrategia internacional soviética: las victorias atléticas eran interpretadas como prueba del éxito del modelo socialista y como una forma de prestigio internacional que trascendía el ámbito deportivo.</p>
+            <cite>White · 2022</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/moscow/lenin.jfif" alt="Figura de Lenin en ceremonia olímpica" />
+            <figcaption>Figura de Lenin · Ceremonia olímpica, Moscú 1980</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/moscow/publicidad.jpg" alt="Publicidad oficial con Misha" />
+            <figcaption>Publicidad oficial con Misha · Moscú 1980</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>Esa estrategia se vio profundamente alterada por el contexto geopolítico. Tras la invasión soviética de Afganistán en 1979, Estados Unidos y varios aliados promovieron un boicot a los Juegos de Moscú. Este boicot se convirtió en una herramienta de confrontación política dentro de la Guerra Fría, utilizando el deporte como un medio para disputar legitimidad internacional sin recurrir a la confrontación militar directa. Frente a esta situación, el gobierno soviético respondió con Misha, el osito mascota diseñado por Viktor Chizhikov, destinado a suavizar la imagen internacional de la URSS y presentar un rostro más cercano y humano del país anfitrión.</p>
+            <cite>Corthorn · 2025 — Brown · 2013</cite>
+          </div>
+        </div>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>El personaje fue utilizado en una extensa campaña cultural y comercial que incluyó dibujos animados, juguetes y productos de merchandising. Su objetivo era asociar la URSS con ternura y accesibilidad, contrarrestando la imagen de autoritarismo y militarismo que dominaba la percepción occidental. La clausura de los Juegos, en la que Misha se despidió ante el estadio en una emotiva secuencia, se convirtió en uno de los momentos más recordados de la historia olímpica.</p>
+            <cite>Brown · 2013</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/moscow/closing.jpg" alt="Misha durante la ceremonia de clausura" />
+            <figcaption>Misha · Ceremonia de clausura, Moscú 1980</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Moscú 1980 mostró cómo el escenario olímpico podía ser simultáneamente una plataforma de prestigio y un campo de batalla simbólico.</p>
+          <p class="gr-closing__bridge">El boicot liderado por Estados Unidos redujo significativamente la participación de países occidentales y transformó los Juegos en un episodio más de la confrontación ideológica entre bloques. El evento confirmó que la influencia internacional no solo se construía mediante propaganda o modernización, sino también a través de gestos diplomáticos, boicots y estrategias culturales que buscaban moldear la opinión pública mundial.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div id="bridge-moscow" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== LOS ANGELES 1984 ==================== -->
+  <section id="scene-la" class="narrative-section" aria-label="Los Angeles 1984 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-la" class="story-panel gr-panel" data-theme="la" aria-label="Los Angeles 1984 story panel">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">El Olimpismo Corporativo</p>
+          <h2 class="gr-hero__city">Los Ángeles</h2>
+          <p class="gr-hero__year">1984</p>
+        </header>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Si Moscú 1980 mostró que los Juegos podían convertirse en un campo de disputa simbólica entre superpotencias, Los Ángeles 1984 marcó un giro distinto: el olimpismo pasó a funcionar también como una vitrina del capitalismo estadounidense y su capacidad de convertir el deporte en un espectáculo global rentable. En pleno contexto de Guerra Fría y tras el boicot estadounidense a Moscú 1980, el evento fue presentado como una oportunidad para proyectar una imagen optimista y poderosa de Estados Unidos hacia el mundo. Los Juegos funcionaron no solo como un evento deportivo, sino como una plataforma para exportar una narrativa de éxito económico, modernidad y liderazgo cultural.</p>
+            <cite>Lieser · 2014</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/la/opening.avif" alt="Ceremonia de apertura Los Ángeles 1984" />
+            <figcaption>Ceremonia de apertura · Los Ángeles 1984</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/la/coca cola.webp" alt="Coca-Cola como patrocinador oficial" />
+            <figcaption>Coca-Cola · Bebida oficial de los Juegos, 1984</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>Una de las principales innovaciones fue su modelo económico. Después del enorme endeudamiento de Montreal 1976 y de la crisis financiera del movimiento olímpico, Los Ángeles organizó los primeros Juegos financiados principalmente por capital privado. Bajo el liderazgo de Peter Ueberroth, el comité organizador impulsó acuerdos de patrocinio corporativo y grandes contratos televisivos que transformaron radicalmente la economía del olimpismo. Este modelo generó un superávit de más de 200 millones de dólares y consolidó el papel del marketing deportivo global, inaugurando una nueva etapa en la relación entre los Juegos Olímpicos, las empresas y los medios de comunicación.</p>
+            <cite>Woodward · 2004</cite>
+          </div>
+        </div>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>La proyección de esa narrativa también se construyó visualmente. El lenguaje gráfico de los Juegos, con estructuras temporales, colores intensos y una iconografía festiva, creó una estética reconocible que unificó una ciudad dispersa y la volvió especialmente atractiva para la televisión global. El diseño utilizó colores brillantes y estructuras ligeras para crear una atmósfera optimista que reflejaba la diversidad cultural de Los Ángeles y reforzaba la imagen de una sociedad abierta y dinámica.</p>
+            <cite>Morgan · 2021</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/la/logo.png" alt="Logo oficial Los Ángeles 1984" />
+            <figcaption>Logo oficial · Los Ángeles 1984</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Los Ángeles 1984 inauguró una nueva etapa en la que el espectáculo mediático y el marketing reemplazaron a la propaganda estatal como principal instrumento de soft power olímpico.</p>
+          <p class="gr-closing__bridge">Sin embargo, esa imagen ocultaba tensiones reales. La representación de Los Ángeles como una ciudad multicultural y armoniosa contrastaba con problemas de desigualdad, tensiones raciales y políticas de control urbano que acompañaron la preparación del evento. Los Juegos de 1984 ilustran así un cambio clave en la historia olímpica: el uso del evento como instrumento de influencia internacional ya no dependía únicamente de la propaganda estatal directa, sino también de la capacidad del espectáculo mediático, el diseño urbano y el marketing para proyectar una imagen nacional atractiva a escala global.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div id="bridge-la" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== SEOUL 1988 ==================== -->
+  <section id="scene-seoul" class="narrative-section" aria-label="Seoul 1988 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-seoul" class="story-panel gr-panel" data-theme="seoul" aria-label="Seoul 1988 story panel">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">Del Autoritarismo al Escenario Global</p>
+          <h2 class="gr-hero__city">Seúl</h2>
+          <p class="gr-hero__year">1988</p>
+        </header>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Los Juegos Olímpicos de Seúl 1988 representaron un momento decisivo en la historia contemporánea de Corea del Sur y en la evolución política del olimpismo. Para el país, el evento fue una oportunidad para proyectarse ante el mundo como una nación moderna y económicamente dinámica, dejando atrás la imagen de un Estado marcado por la guerra y la inestabilidad política. La decisión de organizar los Juegos respondió a una estrategia consciente de prestigio internacional iniciada décadas antes, cuando el gobierno surcoreano buscó seguir el ejemplo de Japón en 1964 y utilizar el olimpismo como vitrina de desarrollo nacional.</p>
+            <cite>O'Neill · 2022</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/seoul/oficial.webp" alt="Logo y pictogramas oficiales Seúl 1988" />
+            <figcaption>Logo y pictogramas oficiales · Seúl 1988</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/seoul/nam.webp" alt="Nam June Paik, Dadaikseon" />
+            <figcaption>Nam June Paik · Dadaikseon, 1988</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>La preparación del evento implicó una transformación urbana y simbólica profunda. En pocos años, Seúl experimentó una modernización acelerada con nuevas avenidas, líneas de metro, parques, estadios y espacios culturales que buscaban presentar una capital moderna y organizada ante los visitantes internacionales. Esta renovación también se expresó en el plano cultural y visual, donde el lema "Seoul to the World, the World to Seoul", la mascota Hodori y la canción Hand in Hand proyectaron una imagen de Corea abierta, optimista y culturalmente reconocible en el escenario global.</p>
+            <cite>Goodman · 2025</cite>
+          </div>
+        </div>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>El contexto político dio a estos Juegos un significado aún mayor. Durante la década de 1980 Corea del Sur vivía intensas protestas democráticas contra el régimen autoritario. La proximidad de los Juegos y la presión internacional limitaron el uso de la represión estatal y contribuyeron a las reformas que culminaron en la adopción de elecciones presidenciales directas en 1987. De esta manera, el evento no solo sirvió como vitrina internacional, sino también como catalizador de un proceso de transición política. Después de los boicots de Moscú 1980 y Los Ángeles 1984, la participación de 159 países convirtió a la Olimpiada en un símbolo de apertura internacional y reconocimiento diplomático para Corea del Sur.</p>
+            <cite>O'Neill · 2022 — Goodman · 2025</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/seoul/doves.webp" alt="Palomas blancas en la ceremonia de apertura" />
+            <figcaption>Palomas blancas · Ceremonia de apertura, Seúl 1988</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Seúl 1988 demostró que los Juegos Olímpicos podían funcionar como una herramienta capaz de reposicionar a un país en el sistema internacional y de proyectar una nueva identidad nacional ante el mundo.</p>
+          <p class="gr-closing__bridge">En ese sentido, Seúl representa la culminación de un ciclo que comenzó en Tokio 1964: el uso del olimpismo como plataforma de legitimación internacional para economías emergentes con ambiciones de protagonismo global. Lo que siguió a partir de los años noventa fue una nueva fase, en la que potencias ya consolidadas utilizarían los Juegos no para entrar al sistema internacional, sino para redefinir su lugar dentro de él.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div id="bridge-seoul" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== BEIJING 2008 ==================== -->
+  <section id="scene-beijing" class="narrative-section" aria-label="Beijing 2008 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-beijing" class="story-panel gr-panel" data-theme="beijing" aria-label="Beijing 2008 story panel">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">El Sueño Centenario</p>
+          <h2 class="gr-hero__city">Pekín</h2>
+          <p class="gr-hero__year">2008</p>
+        </header>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Los Juegos Olímpicos de Pekín 2008 representaron un momento clave en la estrategia internacional de China. A diferencia de Seúl 1988, donde los Juegos ayudaban a anunciar una transformación, en Pekín el objetivo era demostrar que China ya se había consolidado como potencia global. El evento fue presentado como una oportunidad para fortalecer su soft power, aumentar su atractivo internacional y obtener un reconocimiento más amplio como actor central del orden mundial. Los Juegos funcionaron como la puesta en escena de un sueño centenario de prestigio, aceptación y pertenencia plena a la comunidad internacional.</p>
+            <cite>Zhongying · 2008</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/beijing/tambores.jpg" alt="Tambores en la ceremonia de apertura de Pekín 2008" />
+            <figcaption>Ceremonia de apertura · Pekín 2008</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/beijing/mascotas.jpg" alt="Mascotas oficiales Pekín 2008" />
+            <figcaption>Mascotas oficiales · Pekín 2008</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>Esa imagen se construyó a través de una exhibición monumental de infraestructura, organización y simbolismo. El lema "One World, One Dream", el Estadio Nacional conocido como el Nido de Pájaro, la ceremonia inaugural y la escala misma del evento proyectaron una China moderna, eficiente y tecnológicamente sofisticada. Al mismo tiempo, los Juegos permitieron mostrar al país como un centro de interacción global, abierto a empresas multinacionales, expertos extranjeros y grandes flujos de inversión, cultura y deporte. Pekín no solo quería impresionar al exterior, sino también reforzar internamente la idea de que China había dejado atrás su antigua marginalidad.</p>
+            <cite>Zhongying · 2008</cite>
+          </div>
+        </div>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Sin embargo, esa puesta en escena también reveló los límites del soft power cuando la imagen proyectada entra en tensión con lo que se busca controlar u ocultar. Mientras el gobierno chino defendía los Juegos como una oportunidad para mejorar su relación con el mundo, aumentaban las críticas por derechos humanos, censura, restricciones a la protesta y represión en regiones como el Tíbet. La imagen de apertura que China quería proyectar convivió con la percepción de un Estado que seguía dependiendo de un control político muy estricto para sostener esa narrativa.</p>
+            <cite>Wang · 2024</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/beijing/nest.jpg" alt="Estadio Olímpico, el Nido de Pájaro" />
+            <figcaption>Estadio Nacional · El Nido de Pájaro, Pekín 2008</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Pekín 2008 dejó claro que el poder olímpico del siglo XXI ya no consiste solamente en proyectar una imagen atractiva, sino en disputar qué modelo de modernidad y liderazgo puede imponerse en la escena internacional.</p>
+          <p class="gr-closing__bridge">China impresionó al mundo, amplió su prestigio especialmente en Asia y en el mundo en desarrollo, y convirtió el olimpismo en una demostración de escala global de su nuevo estatus. Pero estos Juegos se entienden mejor no solo como un ejercicio de proyección simbólica, sino como una de las expresiones más ambiciosas y controvertidas del soft power contemporáneo.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div id="bridge-beijing" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== SOCHI 2014 ==================== -->
+  <section id="scene-sochi" class="narrative-section" aria-label="Sochi 2014 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-sochi" class="story-panel gr-panel" data-theme="sochi" aria-label="Sochi 2014 story panel">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">Grandeza y Contradicción</p>
+          <h2 class="gr-hero__city">Sochi</h2>
+          <p class="gr-hero__year">2014</p>
+        </header>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Si Pekín 2008 había mostrado el soft power como una demostración de llegada, Sochi 2014 lo presentó como una exhibición de prestigio estatal y liderazgo político. Para Vladimir Putin, los Juegos no eran simplemente un evento deportivo, sino una oportunidad para reafirmar el lugar de Rusia en el escenario internacional. La enorme inversión, la construcción de infraestructura a gran escala y la implicación directa del presidente en la candidatura y en la organización del evento buscaban proyectar la imagen de un país moderno, eficiente y nuevamente central en la política mundial.</p>
+            <cite>Paullier · 2014</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/sochi/opening.jpg" alt="Sochi durante la ceremonia de inauguración" />
+            <figcaption>Ceremonia de inauguración · Sochi 2014</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/sochi/patrones.jpg" alt="Publicidad con patrones inspirados en la cultura rusa" />
+            <figcaption>Identidad visual · Inspirada en la cultura rusa tradicional</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>Esa narrativa también se construyó a través del espectáculo. La ceremonia de apertura ofreció una representación monumental de la historia rusa, combinando referencias culturales, literatura, ballet y símbolos imperiales y soviéticos en una puesta en escena diseñada para impresionar a la audiencia global. Con este despliegue, Rusia intentaba presentarse como una civilización histórica, culturalmente sofisticada y capaz de producir un espectáculo de escala mundial. Sin embargo, el brillo de esa escenografía convivía con críticas sobre problemas logísticos, costos excesivos y la percepción de que el evento buscaba compensar con simbolismo algunas debilidades estructurales del país.</p>
+            <cite>Collins · 2014</cite>
+          </div>
+        </div>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Las controversias políticas ampliaron aún más esas tensiones. La aprobación de la ley contra la llamada propaganda homosexual poco antes de los Juegos situó a Sochi en el centro de un debate internacional sobre derechos LGBT. La ambigüedad de la legislación generó preocupación porque podía permitir discriminación o persecución tanto de ciudadanos rusos como de visitantes extranjeros. De esta manera, mientras el gobierno ruso insistía en que los Juegos estaban abiertos a todos los participantes, el mensaje político transmitía una identidad nacional basada en valores conservadores y en una fuerte afirmación del control estatal.</p>
+            <cite>Chun · 2013</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/sochi/ceremonia.jfif" alt="Ceremonia de apertura Sochi 2014" />
+            <figcaption>Ceremonia de apertura · Sochi 2014</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Sochi 2014 mostró una forma ambigua de soft power en la que el espectáculo y la grandeza cultural buscaban seducir a la audiencia global mientras crecían las críticas relacionadas con autoritarismo y exclusión.</p>
+          <p class="gr-closing__bridge">El olimpismo en Sochi no solo sirvió para proyectar la imagen del Estado ruso, sino también para evidenciar las tensiones entre esa imagen y los valores universales que los propios Juegos afirman representar. Una contradicción que, lejos de ser excepcional, se convertiría en una constante del poder olímpico en el siglo XXI.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div id="bridge-sochi" class="scene-bridge" aria-hidden="true"></div>
+
+  <!-- ==================== PARIS 2024 ==================== -->
+  <section id="scene-paris" class="narrative-section" aria-label="Paris 2024 narrative">
+    <div class="narrative-spacer" style="height: 320vh;"></div>
+  </section>
+  <section id="panel-paris" class="story-panel gr-panel" data-theme="paris" aria-label="Paris 2024 story panel">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">La Ciudad Como Escenario</p>
+          <h2 class="gr-hero__city">París</h2>
+          <p class="gr-hero__year">2024</p>
+        </header>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Más de un siglo después de haber sido sede por última vez, París utilizó los Juegos Olímpicos de 2024 para reafirmar su posición como una de las grandes capitales globales. El evento fue concebido como una plataforma de image branding: una oportunidad para proyectar la identidad cultural, histórica y turística de la ciudad ante una audiencia mundial. La ceremonia inaugural, realizada por primera vez fuera de un estadio con atletas desfilando por el río Sena mientras monumentos emblemáticos servían de telón de fondo, buscó convertir a la propia ciudad en el escenario central del espectáculo olímpico.</p>
+            <cite>Whigham · 2024</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/paris/seine.webp" alt="Ceremonia de apertura en el Sena" />
+            <figcaption>Ceremonia de apertura · Río Sena, París 2024</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-entry gr-entry--flip gr-reveal">
+          <figure class="gr-entry__img">
+            <img src="assets/images/paris/maria.jpg" alt="Acto de Gojira con María Antonieta" />
+            <figcaption>Gojira y Marina Viotti · Conciergerie, París 2024</figcaption>
+          </figure>
+          <div class="gr-entry__text">
+            <p>El impacto mediático fue inmediato: la ceremonia fue una de las aperturas olímpicas más vistas desde Londres 2012. Sin embargo, algunos momentos del espectáculo generaron controversia. Una escena con bailarines y drag queens que algunos grupos interpretaron como una referencia a la Última Cena provocó críticas de sectores religiosos. La aparición teatral de María Antonieta sosteniendo su propia cabeza desde una ventana de la Conciergerie también generó debate. Los organizadores respondieron que el objetivo era celebrar valores republicanos como la inclusión, la diversidad y la libertad.</p>
+            <cite>Le Monde · 2024</cite>
+          </div>
+        </div>
+
+        <div class="gr-entry gr-reveal">
+          <div class="gr-entry__text">
+            <p>Esta estrategia se complementó con un fuerte énfasis en sostenibilidad y legado. Los organizadores apostaron por reutilizar infraestructuras existentes y limitar la construcción de nuevos estadios, con el objetivo de reducir la huella ambiental del evento y evitar algunos de los problemas urbanos que habían generado ediciones anteriores. Con ello, París intentó presentarse como un modelo distinto para los Juegos Olímpicos del futuro, más eficiente en el uso de recursos y alineado con las crecientes demandas internacionales de responsabilidad ambiental.</p>
+            <cite>Özyeşil y Tembelo · 2025</cite>
+          </div>
+          <figure class="gr-entry__img">
+            <img src="assets/images/paris/Festivité.webp" alt="Festivité — escena de la ceremonia de apertura" />
+            <figcaption>Festivité · Ceremonia de apertura, París 2024</figcaption>
+          </figure>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">París 2024 refleja una nueva etapa en la evolución del poder olímpico: los Juegos como plataforma para proyectar valores de sostenibilidad, innovación urbana y cooperación global.</p>
+          <p class="gr-closing__bridge">Sin embargo, el caso de París demuestra que incluso estas nuevas narrativas siguen enfrentando el mismo desafío histórico del olimpismo: la distancia entre la imagen cuidadosamente construida para el mundo y las tensiones culturales, políticas y sociales que inevitablemente emergen detrás del espectáculo.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONCLUSION ==================== -->
+  <section id="panel-conclusion" class="story-panel gr-panel" data-theme="conclusion" aria-label="Conclusion panel">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">Conclusión</p>
+          <h2 class="gr-hero__city">El Deporte Como Lenguaje del Poder</h2>
+        </header>
+
+        <div class="gr-closing gr-reveal" style="border-top:none; padding-top:0;">
+          <p class="gr-closing__lead">A lo largo de su historia moderna, los Juegos Olímpicos han demostrado que el deporte nunca ha sido completamente neutral.</p>
+          <p class="gr-closing__bridge">Más allá de la competencia atlética, los Juegos se han convertido en escenarios privilegiados para la proyección política, cultural y simbólica de los Estados. Desde Berlín 1936 hasta Pekín 2008, pasando por Sochi 2014 y París 2024, cada edición muestra cómo los países anfitriones utilizan el evento para construir narrativas sobre sí mismos, proyectar una imagen específica ante el mundo y reforzar su posición dentro del sistema internacional.</p>
+        </div>
+
+        <div class="gr-closing gr-reveal" style="border-top:none;">
+          <p class="gr-closing__bridge">En ese proceso, el olimpismo ha funcionado primero como una herramienta de propaganda directa y, con el paso del tiempo, como un mecanismo más sofisticado de soft power. Los gobiernos han comprendido que organizar los Juegos permite influir en la percepción global mediante símbolos, arquitectura, ceremonias y grandes espectáculos mediáticos. A través de estos elementos se busca mostrar modernidad, estabilidad, desarrollo económico o liderazgo cultural, convirtiendo al evento en una vitrina global de prestigio nacional.</p>
+        </div>
+
+        <div class="gr-closing gr-reveal" style="border-top:none;">
+          <p class="gr-closing__bridge">Sin embargo, los casos analizados también revelan que esta estrategia nunca está completamente bajo control del país anfitrión. La misma visibilidad que permite proyectar una imagen positiva también expone tensiones internas, controversias políticas y críticas internacionales. Los Juegos pueden fortalecer el prestigio de un Estado, pero también amplifican debates sobre derechos humanos, identidad cultural, autoritarismo, sostenibilidad o desigualdad. De esta manera, el olimpismo funciona simultáneamente como plataforma de promoción y como espacio de escrutinio global.</p>
+        </div>
+
+        <div class="gr-closing gr-reveal">
+          <p class="gr-closing__lead">Más que simples celebraciones deportivas, los Juegos Olímpicos se han consolidado como un escenario donde se negocian narrativas de poder, legitimidad e identidad nacional.</p>
+          <p class="gr-closing__bridge">Cada edición refleja las aspiraciones del país anfitrión, pero también las contradicciones que acompañan a esas aspiraciones. En última instancia, el olimpismo revela que el deporte, lejos de estar separado de la política, se ha convertido en uno de los lenguajes más visibles y eficaces a través de los cuales los Estados intentan contarle al mundo quiénes son y qué lugar aspiran a ocupar en él.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       BIBLIOGRAPHY
+  ================================================================ -->
+  <section id="bibliography" class="story-panel gr-panel" data-theme="conclusion" aria-label="Bibliography" style="min-height:auto;">
+    <div class="story-panel__inner gr-inner">
+      <div class="gr-content">
+
+        <header class="gr-header">
+          <p class="gr-hero__eyebrow">Referencias</p>
+          <h2 class="gr-hero__city" style="font-size:clamp(1.8rem,4vw,3rem);">Bibliografía</h2>
+        </header>
+
+        <div class="gr-reveal" style="padding-bottom:clamp(3rem,6vw,6rem);">
+          <ol class="bib-list">
+        <li><span class="bib-author">Bonner, M.</span> <span class="bib-year">(2024).</span> WTF is going on with the poop protests and the Seine during the Paris Olympics: An investigation. Cosmopolitan. <a href="https://www.cosmopolitan.com/lifestyle/a61668416/paris-olympics-poop-protest-seine-river/" target="_blank" rel="noopener">https://www.cosmopolitan.com/lifestyle/a61668416/paris-olympics-poop-protest-seine-river/</a></li>
+        <li><span class="bib-author">Brown, A.</span> <span class="bib-year">(2013).</span> Misha, la mascota de los Juegos Olímpicos de Moscú / Unión Soviética (1980). Leninland [1922-1991]. <a href="https://leninland.wordpress.com/2013/05/26/misha-mascota-de-los-juegos-olimpicos-moscu-union-sovietica-1980/" target="_blank" rel="noopener">https://leninland.wordpress.com/2013/05/26/misha-mascota-de-los-juegos-olimpicos-moscu-union-sovietica-1980/</a></li>
+        <li><span class="bib-author">Castañeda, L. M.</span> <span class="bib-year">(2014).</span> Spectacular Mexico: Design, Propaganda, and the 1968 Olympics.</li>
+        <li><span class="bib-author">Christesen, P.</span> <span class="bib-year">(2007).</span> Olympic victor lists and ancient Greek history. Cambridge University Press.</li>
+        <li><span class="bib-author">Chun, Y.</span> <span class="bib-year">(2013).</span> Russia: Medals, Scandals, and Propaganda. Cornell International Law Journal. <a href="https://publications.lawschool.cornell.edu/cilj/2013/10/14/medals-scandals-and-propaganda/" target="_blank" rel="noopener">https://publications.lawschool.cornell.edu/cilj/2013/10/14/medals-scandals-and-propaganda/</a></li>
+        <li><span class="bib-author">Cody, N. W.</span> <span class="bib-year">(2016).</span> The Berlin Olympics: Sports, Anti-Semitism, and propaganda in Nazi Germany. The Cupola: Scholarship at Gettysburg College. <a href="https://cupola.gettysburg.edu/student_scholarship/434" target="_blank" rel="noopener">https://cupola.gettysburg.edu/student_scholarship/434</a></li>
+        <li><span class="bib-author">Collins, M.</span> <span class="bib-year">(2014).</span> The 2014 Sochi Opening Ceremonies Recap: The Winter Olympics of our Discontent. Vanity Fair. <a href="https://www.vanityfair.com/news/2014/02/sochi-opening-ceremonies-recap" target="_blank" rel="noopener">https://www.vanityfair.com/news/2014/02/sochi-opening-ceremonies-recap</a></li>
+        <li><span class="bib-author">Corthorn, P.</span> <span class="bib-year">(2025).</span> Governments and soft power in international affairs: Britain and the boycott of the 1980 Moscow Olympics. History & Policy. <a href="https://historyandpolicy.org/policy-papers/papers/governments-and-soft-power-in-international-affairs-britain-and-the-boycott/" target="_blank" rel="noopener">https://historyandpolicy.org/policy-papers/papers/governments-and-soft-power-in-international-affairs-britain-and-the-boycott/</a></li>
+        <li><span class="bib-author">Goodman, S.</span> <span class="bib-year">(2025).</span> 1988: Sixteen Days That Changed Korea — and the world. The Kosmosis. <a href="https://thekosmosis.com/seoul1988/" target="_blank" rel="noopener">https://thekosmosis.com/seoul1988/</a></li>
+        <li><span class="bib-author">Honda, S.</span> <span class="bib-year">(2019).</span> How The 1964 Tokyo Olympic Games Changed The Global Identity Of Japan. <a href="https://shotarohondamoore.medium.com/how-the-1964-tokyo-olympic-games-changed-the-global-identity-of-japan-274db4734df8" target="_blank" rel="noopener">https://shotarohondamoore.medium.com/how-the-1964-tokyo-olympic-games-changed-the-global-identity-of-japan-274db4734df8</a></li>
+        <li><span class="bib-author">Jeong, J., Grix, J., & Grix, L.</span> <span class="bib-year">(2024).</span> The role of sports mega-events in China's unique soft power strategy. Humanities and Social Sciences Communications, 11(1). <a href="https://doi.org/10.1057/s41599-024-04116-9" target="_blank" rel="noopener">https://doi.org/10.1057/s41599-024-04116-9</a></li>
+        <li><span class="bib-author">Karaiskakis, D.</span> <span class="bib-year">(2024).</span> Olive Wreaths of Olympia: Ancient Symbols of Victory. Ancient Olympia Tickets. <a href="https://olympia-museum.gr/olive-wreaths-of-olympia-ancient-symbols-of-victory/" target="_blank" rel="noopener">https://olympia-museum.gr/olive-wreaths-of-olympia-ancient-symbols-of-victory/</a></li>
+        <li><span class="bib-author">Le Monde.</span> <span class="bib-year">(2024).</span> Paris Olympics organizers "sorry" for any offense over opening ceremony. Le Monde. <a href="https://www.lemonde.fr/en/sports/article/2024/07/28/paris-olympics-organizers-sorry-for-any-offense-over-opening-ceremony_6702640_9.html" target="_blank" rel="noopener">https://www.lemonde.fr/en/sports/article/2024/07/28/paris-olympics-organizers-sorry-for-any-offense-over-opening-ceremony_6702640_9.html</a></li>
+        <li><span class="bib-author">Lieser, J. R.</span> <span class="bib-year">(2014).</span> Los Angeles and the 1984 Olympic Games: cultural commodification, corporate sponsorship, and the Cold War. <a href="https://escholarship.org/uc/item/2tb760kz" target="_blank" rel="noopener">https://escholarship.org/uc/item/2tb760kz</a></li>
+        <li><span class="bib-author">Morgan, E.</span> <span class="bib-year">(2021).</span> How the Gleeful Aesthetic of L.A.'s 1984 Olympics Unified a Sprawling City. PBS SoCal. <a href="https://www.pbssocal.org/shows/lost-la/how-the-gleeful-aesthetic-of-l-a-s-1984-olympics-unified-a-sprawling-city" target="_blank" rel="noopener">https://www.pbssocal.org/shows/lost-la/how-the-gleeful-aesthetic-of-l-a-s-1984-olympics-unified-a-sprawling-city</a></li>
+        <li><span class="bib-author">Nájar, A.</span> <span class="bib-year">(2023).</span> La matanza de Tlatelolco: qué pasó el 2 de octubre de 1968. BBC News Mundo. <a href="https://www.bbc.com/mundo/articles/c8745el6z5go" target="_blank" rel="noopener">https://www.bbc.com/mundo/articles/c8745el6z5go</a></li>
+        <li><span class="bib-author">O'Neill, A. M., III.</span> <span class="bib-year">(2022).</span> The 1988 Olympics in Seoul: a triumph of sport and diplomacy. 38 North. <a href="https://www.38north.org/2018/02/aoneill020818/" target="_blank" rel="noopener">https://www.38north.org/2018/02/aoneill020818/</a></li>
+        <li><span class="bib-author">Özyeşil, M., & Tembelo, H.</span> <span class="bib-year">(2025).</span> The economic and social impacts of the Olympics: A study on the Paris 2024 Olympics. Beykoz Akademi Dergisi, 13(2), 605–625. <a href="https://doi.org/10.14514/beykozad.1608898" target="_blank" rel="noopener">https://doi.org/10.14514/beykozad.1608898</a></li>
+        <li><span class="bib-author">Paullier, J.</span> <span class="bib-year">(2014).</span> Lo polémico y lo curioso de los Juegos de Invierno de Sochi. BBC News Mundo. <a href="https://www.bbc.com/mundo/noticias/2014/02/140206_juegos_olimpicos_invierno_sochi_rusia_previa_jp" target="_blank" rel="noopener">https://www.bbc.com/mundo/noticias/2014/02/140206_juegos_olimpicos_invierno_sochi_rusia_previa_jp</a></li>
+        <li><span class="bib-author">Suddath, C.</span> <span class="bib-year">(2008).</span> A brief history of: Olympic medals. TIME. <a href="https://time.com/archive/6685879/a-brief-history-of-olympic-medals/" target="_blank" rel="noopener">https://time.com/archive/6685879/a-brief-history-of-olympic-medals/</a></li>
+        <li><span class="bib-author">Tagsold, C.</span> <span class="bib-year">(2020).</span> Symbolic transformation: The 1964 Tokyo Games reconsidered. Japan Focus, 18(3). <a href="https://doi.org/10.1017/s1557466020029514" target="_blank" rel="noopener">https://doi.org/10.1017/s1557466020029514</a></li>
+        <li><span class="bib-author">United States Holocaust Memorial Museum.</span> <span class="bib-year">(2025).</span> The Nazi Olympics: Berlin 1936. Holocaust Encyclopedia. <a href="https://encyclopedia.ushmm.org/content/en/article/the-nazi-olympics-berlin-1936" target="_blank" rel="noopener">https://encyclopedia.ushmm.org/content/en/article/the-nazi-olympics-berlin-1936</a></li>
+        <li><span class="bib-author">Wang, N.</span> <span class="bib-year">(2024).</span> Juegos Olímpicos de Pekín 2008: ¿un mundo, un sueño? RFI. <a href="https://www.rfi.fr/es/deportes/20240301-juegos-ol%C3%ADmpicos-de-pek%C3%ADn-2008-un-mundo-un-sue%C3%B1o" target="_blank" rel="noopener">https://www.rfi.fr/es/deportes/20240301-juegos-ol%C3%ADmpicos-de-pek%C3%ADn-2008-un-mundo-un-sue%C3%B1o</a></li>
+        <li><span class="bib-author">Whigham, S.</span> <span class="bib-year">(2024).</span> Olympics 2024: Legacy, lessons learned, and challenges for Los Angeles 2028. Oxford Brookes University. <a href="https://www.brookes.ac.uk/about-brookes/news/news-from-2024/08/olympics-2024-legacy-lessons-learned-and-challenge" target="_blank" rel="noopener">https://www.brookes.ac.uk/about-brookes/news/news-from-2024/08/olympics-2024-legacy-lessons-learned-and-challenge</a></li>
+        <li><span class="bib-author">White, J.</span> <span class="bib-year">(2022).</span> The 1980 Moscow Olympic Boycott: Politics and the public. Pepperdine Digital Commons. <a href="https://digitalcommons.pepperdine.edu/globaltides/vol16/iss1/4" target="_blank" rel="noopener">https://digitalcommons.pepperdine.edu/globaltides/vol16/iss1/4</a></li>
+        <li><span class="bib-author">Woodward, S.</span> <span class="bib-year">(2004).</span> How L.A. saved the Games. Sports Business Journal. <a href="https://www.sportsbusinessjournal.com/Journal/Issues/2004/07/19/Marketingsponsorship/How-LA-Saved-The-Games/" target="_blank" rel="noopener">https://www.sportsbusinessjournal.com/Journal/Issues/2004/07/19/Marketingsponsorship/How-LA-Saved-The-Games/</a></li>
+        <li><span class="bib-author">Zhongying, P.</span> <span class="bib-year">(2008).</span> The Beijing Olympics and China's soft power. Brookings. <a href="https://www.brookings.edu/articles/the-beijing-olympics-and-chinas-soft-power/" target="_blank" rel="noopener">https://www.brookings.edu/articles/the-beijing-olympics-and-chinas-soft-power/</a></li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/greece.js"></script>
+</body>
+</html>

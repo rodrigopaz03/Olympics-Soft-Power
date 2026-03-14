@@ -1,0 +1,335 @@
+/* =============================================================
+   GREECE PANEL — css/greece.css
+   Mismo lenguaje visual que el esqueleto: negro profundo,
+   tipografía blanca, sin decoración superflua.
+   Cinzel para títulos, Cormorant para cuerpo.
+============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* ── Panel ───────────────────────────────────────────────── */
+.gr-panel {
+  background: #070707;
+  overflow: hidden;
+}
+
+/* Gradiente superior — fusión con el negro del mapa */
+.gr-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30vh;
+  background: linear-gradient(to bottom, #000 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Inner container — hereda del story-panel ────────────── */
+.gr-inner {
+  padding-top: 0;
+  padding-bottom: clamp(5rem, 10vw, 9rem);
+}
+
+/* ── HERO — escapa del contenedor para ser full-width ─────── */
+.gr-hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  margin-left: calc(-1 * ((100vw - 100%) / 2));
+}
+
+.gr-hero__img-layer {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+}
+
+.gr-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  filter: saturate(0.55) brightness(0.7);
+  transform: scale(1.01); /* elimina cualquier borde residual */
+}
+
+.gr-hero__fade-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(
+    to bottom,
+    transparent           0%,
+    rgba(7,7,7,0.6)      50%,
+    rgba(7,7,7,0.95)     80%,
+    #070707             100%
+  );
+  pointer-events: none;
+}
+
+.gr-hero__titles {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 3rem;
+  text-align: center;
+  z-index: 2;
+  color: #fff;
+}
+
+.gr-hero__eyebrow {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(0.62rem, 1vw, 0.72rem);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.8rem;
+}
+
+.gr-hero__city {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: #fff;
+  line-height: 1;
+  margin: 0;
+}
+
+.gr-hero__year {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  font-style: italic;
+  color: rgba(255,255,255,0.45);
+  margin-top: 0.6rem;
+  letter-spacing: 0.15em;
+}
+
+/* ── HEADER — título sin imagen ───────────────────────────── */
+.gr-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: clamp(3rem, 5vw, 4rem);
+}
+
+/* ── CONTENT AREA ─────────────────────────────────────────── */
+.gr-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5rem, 9vw, 8rem);
+  padding-top: clamp(4rem, 7vw, 6rem);
+}
+
+/* ── ENTRY — par texto/imagen ────────────────────────────── */
+.gr-entry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.gr-entry--flip .gr-entry__img { order: -1; }
+
+/* Texto */
+.gr-entry__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.gr-entry__text p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.05rem, 1.5vw, 1.18rem);
+  line-height: 1.85;
+  color: rgba(255,255,255,0.78);
+  margin: 0;
+}
+
+.gr-entry__text em {
+  font-style: italic;
+  color: rgba(255,255,255,0.95);
+}
+
+.gr-entry__text cite {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  font-style: normal;
+}
+
+/* Imagen */
+.gr-entry__img {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.gr-entry__img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: saturate(0.7) brightness(0.88);
+  transition: filter 0.6s ease;
+}
+
+.gr-entry__img:hover img {
+  filter: saturate(0.9) brightness(1);
+}
+
+.gr-entry__img figcaption {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  text-align: right;
+}
+
+/* ── CLOSING ──────────────────────────────────────────────── */
+.gr-closing {
+  max-width: 72ch;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 4rem) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.gr-closing__lead {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.65);
+  margin: 0;
+}
+
+.gr-closing__bridge {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 1.45vw, 1.12rem);
+  line-height: 1.85;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+}
+
+/* ── SCROLL REVEAL ────────────────────────────────────────── */
+.gr-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.gr-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .gr-entry {
+    grid-template-columns: 1fr;
+  }
+  .gr-entry--flip .gr-entry__img {
+    order: 0;
+  }
+}
+
+/* ── BIBLIOGRAPHY ─────────────────────────────────────────── */
+.bib-list {
+  list-style: none;
+  counter-reset: bib;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: 0;
+  margin: 0;
+}
+
+.bib-list li {
+  counter-increment: bib;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(0.88rem, 1.2vw, 0.98rem);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.45);
+  padding-left: 2rem;
+  position: relative;
+}
+
+.bib-list li::before {
+  content: counter(bib);
+  position: absolute;
+  left: 0;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.2);
+  top: 0.2em;
+}
+
+.bib-author {
+  color: rgba(255,255,255,0.75);
+  font-style: normal;
+}
+
+.bib-year {
+  color: rgba(255,255,255,0.35);
+}
+
+.bib-list a {
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  word-break: break-all;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  display: block;
+  margin-top: 0.2rem;
+  transition: color 0.3s ease;
+}
+
+.bib-list a:hover {
+  color: rgba(255,255,255,0.55);
+}
+.gr-closing__bridge {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 1.45vw, 1.12rem);
+  line-height: 1.85;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+}
+
+/* ── SCROLL REVEAL ────────────────────────────────────────── */
+.gr-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.gr-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .gr-entry {
+    grid-template-columns: 1fr;
+  }
+  .gr-entry--flip .gr-entry__img {
+    order: 0;
+  }
+}

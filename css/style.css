@@ -1,0 +1,601 @@
+/* =========================
+   BASE & RESET
+========================= */
+:root {
+  --color-gate-bg: #000000;
+  --color-gate-text: #ffffff;
+  --color-gate-muted: rgba(255, 255, 255, 0.85);
+  --font-title: "Georgia", "Times New Roman", serif;
+  --font-body: "Arial", "Helvetica", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-gate-bg);
+  color: var(--color-gate-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* =========================
+   GATE (Landing) — Black screen, white text
+========================= */
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: var(--color-gate-bg);
+  pointer-events: none;
+}
+
+.gate__rings {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gate__rings-img {
+  max-width: 180px;
+  width: clamp(120px, 18vw, 200px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.gate__title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.05;
+  max-width: 12ch;
+  margin: 0 auto;
+}
+
+.gate__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  font-weight: 400;
+  color: var(--color-gate-muted);
+  text-align: center;
+  max-width: 36rem;
+  margin: 1.25rem auto 0;
+  line-height: 1.5;
+}
+
+.gate__scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-gate-muted);
+}
+
+.gate__arrow {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+.gate__scroll-text {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Spacer so first scroll has "room" — gate is 100vh, this adds a sliver for trigger */
+.gate-spacer {
+  width: 100%;
+}
+
+.transition-trigger {
+  height: 1px;
+  width: 100%;
+  position: relative;
+  top: 100vh;
+}
+
+/* =========================
+   FIXED MAP BACKGROUND
+========================= */
+.map-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  background: #0a0a0a;
+}
+
+.map-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* SVG fills the inner container; we scale/translate .map-inner via GSAP */
+.map-svg-mount {
+  position: absolute;
+  inset: 0;
+}
+
+/* Inline SVG (injected) */
+.map-background svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Base country look */
+.map-background svg path {
+  fill: rgba(255, 255, 255, 0.10);
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 0.35;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 0.2s ease;
+}
+
+/* Greece-only: special \"historic origin\" highlight treatment (no world fading) */
+.map-background svg path.country-highlight {
+  fill: rgba(255, 255, 255, 0.92);
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 0.6;
+}
+
+/* City marker (injected by JS) */
+.map-background svg .city-marker {
+  /* Minimal monochrome pin (matches black/white aesthetic) */
+  fill: rgba(255, 255, 255, 0.92);
+  stroke: rgba(0, 0, 0, 0.65);
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+}
+
+/* (Removed ring; dot-only is cleaner) */
+
+/* =========================
+   CITY LABEL OVERLAY (e.g. Greece • 776 B.C.)
+========================= */
+.city-label {
+  position: fixed;
+  top: 10%;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  opacity: 0;
+  pointer-events: none;
+  color: #fff;
+  font-family: var(--font-body);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.city-label__name {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.city-label__year {
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.city-label__year::before {
+  content: "• ";
+  margin-right: 0.15rem;
+}
+
+/* =========================
+   NARRATIVE SECTION (scroll spacer)
+========================= */
+.narrative-section {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+.narrative-spacer {
+  width: 100%;
+}
+
+/* =========================
+   STORY PANELS (NO MAP)
+   Full-bleed sections that cover the fixed map behind.
+========================= */
+.story-panel {
+  position: relative;
+  z-index: 6;
+  min-height: 120vh;
+  padding: clamp(3rem, 7vw, 6rem) 1.5rem;
+  background: #0b0b0b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.story-panel__inner {
+  width: min(980px, 92vw);
+  margin: 0 auto;
+}
+
+.story-panel__title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.story-panel__content {
+  max-width: 70ch;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 1.25rem 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+/* Theme hooks (you can customize later) */
+.story-panel[data-theme="greece"]     { background: #070707; }
+.story-panel[data-theme="berlin"]     { background: #0b0b0b; }
+.story-panel[data-theme="tokyo"]      { background: #090909; }
+.story-panel[data-theme="mexico"]     { background: #0a0a0a; }
+.story-panel[data-theme="moscow"]     { background: #0b0b0b; }
+.story-panel[data-theme="la"]         { background: #080808; }
+.story-panel[data-theme="seoul"]      { background: #090909; }
+.story-panel[data-theme="beijing"]    { background: #0b0b0b; }
+.story-panel[data-theme="sochi"]      { background: #090909; }
+.story-panel[data-theme="paris"]      { background: #080808; }
+.story-panel[data-theme="conclusion"] { background: #060606; }
+
+/* =========================
+   SCENE BRIDGE — invisible scroll space for scrubbed zoom-out
+   Sits between each story-panel and the next narrative-section.
+========================= */
+.scene-bridge {
+  position: relative;
+  z-index: 1;
+  height: 160vh;
+  pointer-events: none;
+  background: transparent !important;
+}
+
+/* =========================
+   NARRATIVE CONTENT BLOCK (full-screen overlay)
+========================= */
+.narrative-content {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  /* Lighter overlay so the map stays readable behind text */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.18) 40%,
+      rgba(0, 0, 0, 0.45) 100%
+    );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.narrative-content__inner {
+  width: min(720px, 92vw);
+  height: min(70vh, 620px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.narrative-content__title {
+  font-family: var(--font-title);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 0;
+  margin-top: 0.25rem;
+}
+
+.narrative-content__body {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+}
+
+/* =========================
+   GREECE PANEL — Editorial scrollytelling
+========================= */
+
+/* Override base story-panel for greece */
+.gr-panel {
+  display: block;
+  padding: 0;
+  background: #f5f0e8;      /* warm cream — the "marble" solid */
+  color: #1a1208;
+  min-height: auto;
+  overflow: hidden;
+}
+
+/* ── Hero ─────────────────────────────────── */
+.gr-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 6vh;
+  overflow: hidden;
+}
+
+.gr-hero__img-wrap {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+}
+
+.gr-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+/* Dark gradient so title is readable over the image */
+.gr-hero__vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.20) 40%,
+    rgba(0,0,0,0.72) 100%
+  );
+}
+
+.gr-hero__title-block {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #f5f0e8;
+}
+
+.gr-hero__eyebrow {
+  font-family: 'Georgia', serif;
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 0.6rem;
+}
+
+.gr-hero__title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(4rem, 11vw, 9rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.gr-hero__date {
+  font-family: 'Georgia', serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  letter-spacing: 0.25em;
+  opacity: 0.8;
+  margin-top: 0.9rem;
+}
+
+/* Meander divider at bottom of hero */
+.gr-meander--hero {
+  position: relative;
+  z-index: 2;
+  width: min(720px, 90vw);
+  margin-top: 2.5rem;
+  color: rgba(245,240,232,0.45);
+}
+
+/* ── Body (solid cream background) ───────── */
+.gr-body {
+  background: #f5f0e8;
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 8vw, 7rem);
+}
+
+/* ── Blocks ───────────────────────────────── */
+.gr-block {
+  opacity: 0;
+  transform: translateY(36px);
+  /* JS adds .is-visible which transitions these */
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+              transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+
+.gr-block.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gr-block--left  { align-self: flex-start; width: min(560px, 92vw); margin-left: clamp(0px, 6vw, 80px); }
+.gr-block--right { align-self: flex-end;   width: min(560px, 92vw); margin-right: clamp(0px, 6vw, 80px); }
+.gr-block--full  { align-self: stretch; }
+
+/* ── Card ─────────────────────────────────── */
+.gr-block__card {
+  background: #faf7f2;
+  border: 1px solid rgba(160,130,80,0.18);
+  border-radius: 2px;
+  padding: clamp(1.8rem, 4vw, 3rem) clamp(1.6rem, 3.5vw, 2.8rem);
+  position: relative;
+  box-shadow: 0 2px 24px rgba(100,70,20,0.06);
+}
+
+/* Subtle left accent line */
+.gr-block__card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 2rem; bottom: 2rem;
+  width: 2px;
+  background: #8b6914;
+  opacity: 0.35;
+  border-radius: 1px;
+}
+
+.gr-block__num {
+  display: block;
+  font-family: 'Georgia', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: #8b6914;
+  margin-bottom: 1rem;
+  padding-left: 0.2rem;
+}
+
+.gr-block__meander {
+  color: #8b6914;
+  opacity: 0.50;
+  width: 160px;
+  margin-bottom: 1.2rem;
+}
+
+.gr-block__text {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(0.98rem, 1.35vw, 1.08rem);
+  line-height: 1.85;
+  color: #2c1f08;
+  margin: 0 0 1.1rem;
+}
+
+.gr-block__text em {
+  font-style: italic;
+  color: #1a1208;
+}
+
+.gr-block__cite {
+  font-family: 'Georgia', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: #8b6914;
+  opacity: 0.7;
+  margin: 0;
+  text-align: right;
+}
+
+/* ── Image placeholders ───────────────────── */
+.gr-img-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: rgba(139,105,20,0.08);
+  border: 1px dashed rgba(139,105,20,0.25);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gr-img-placeholder span {
+  font-family: 'Georgia', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8b6914;
+  opacity: 0.55;
+}
+
+/* ── Closing blockquote ───────────────────── */
+.gr-closing {
+  max-width: min(860px, 92vw);
+  margin: 0 auto;
+  text-align: center;
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+.gr-closing__meander {
+  color: #8b6914;
+  opacity: 0.35;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.gr-closing__quote {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.65;
+  color: #1a1208;
+  margin: 0 0 2rem;
+  padding: 0;
+  border: none;
+}
+
+.gr-closing__sub {
+  font-family: 'Georgia', serif;
+  font-size: clamp(0.9rem, 1.3vw, 1rem);
+  line-height: 1.75;
+  color: #5a4020;
+  opacity: 0.8;
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 600px) {
+  .gate__scroll-hint {
+    bottom: 1.5rem;
+  }
+
+  .gate__rings-img {
+    max-width: 120px;
+  }
+}
