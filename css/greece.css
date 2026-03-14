@@ -303,33 +303,16 @@
 .bib-list a:hover {
   color: rgba(255,255,255,0.55);
 }
-.gr-closing__bridge {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1rem, 1.45vw, 1.12rem);
-  line-height: 1.85;
+
+/* ── LANDING ARROW ANIMATION ──────────────────────────────── */
+.gate__arrow--animated {
+  display: block;
+  font-size: 1.5rem;
   color: rgba(255,255,255,0.5);
-  margin: 0;
+  animation: arrowBounce 2s ease-in-out infinite;
 }
 
-/* ── SCROLL REVEAL ────────────────────────────────────────── */
-.gr-reveal {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.gr-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* ── RESPONSIVE ───────────────────────────────────────────── */
-@media (max-width: 700px) {
-  .gr-entry {
-    grid-template-columns: 1fr;
-  }
-  .gr-entry--flip .gr-entry__img {
-    order: 0;
-  }
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0);    opacity: 0.4; }
+  50%       { transform: translateY(8px); opacity: 0.9; }
 }

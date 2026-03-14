@@ -25,16 +25,16 @@
   const HL_CLASS   = "country-highlight";
 
   const SCENES = [
-    { id: "greece", label: "Grecia",            year: "776 a.C.", sectionId: "scene-greece", panelId: "panel-greece", bridgeId: "bridge-greece", selectors: ["path.Greece"],            focus: { fx: 0.43, fy: 0.75 }, zoom: 5.5, showMarker: false },
-    { id: "berlin", label: "Berlín",            year: "1936",     sectionId: "scene-berlin", panelId: "panel-berlin", bridgeId: "bridge-berlin", selectors: ["#DE"],                     focus: { fx: 0.68, fy: 0.30 }, zoom: 5.0 },
-    { id: "tokyo",  label: "Tokio",             year: "1964",     sectionId: "scene-tokyo",  panelId: "panel-tokyo",  bridgeId: "bridge-tokyo",  selectors: ["path.Japan"],              focus: { fx: 0.85, fy: 0.55 }, zoom: 5.5 },
-    { id: "mexico", label: "Ciudad de México",  year: "1968",     sectionId: "scene-mexico", panelId: "panel-mexico", bridgeId: "bridge-mexico", selectors: ["#MX"],                     focus: { fx: 0.60, fy: 0.79 }, zoom: 4.0 },
-    { id: "moscow", label: "Moscú",             year: "1980",     sectionId: "scene-moscow", panelId: "panel-moscow", bridgeId: "bridge-moscow", selectors: ["path.Russian.Federation"], focus: { fx: 0.13, fy: 0.51 }, zoom: 3.5 },
-    { id: "la",     label: "L.A.",        year: "1984",     sectionId: "scene-la",     panelId: "panel-la",     bridgeId: "bridge-la",     selectors: ["path.United.States"],      focus: { fx: 0.05, fy: 0.63 }, zoom: 3.5 },
-    { id: "seoul",  label: "Seúl",              year: "1988",     sectionId: "scene-seoul",  panelId: "panel-seoul",  bridgeId: "bridge-seoul",  selectors: ["#KR"],                     focus: { fx: 0.40, fy: 0.20 }, zoom: 7.0 },
-    { id: "beijing",label: "Pekín",             year: "2008",     sectionId: "scene-beijing",panelId: "panel-beijing",bridgeId: "bridge-beijing",selectors: ["path.China"],              focus: { fx: 0.78, fy: 0.40 }, zoom: 4.5 },
-    { id: "sochi",  label: "Sochi",             year: "2014",     sectionId: "scene-sochi",  panelId: "panel-sochi",  bridgeId: "bridge-sochi",  selectors: ["path.Russian.Federation"], focus: { fx: 0.13, fy: 0.92 }, zoom: 6.0 },
-    { id: "paris",  label: "París",             year: "2024",     sectionId: "scene-paris",  panelId: "panel-paris",  bridgeId: null,            selectors: ["path.France"],             focus: { fx: 0.68, fy: 0.38 }, zoom: 6.0 },
+    { id: "greece", label: "Grecia",           year: "776 a.C.", sectionId: "scene-greece", panelId: "panel-greece", bridgeId: "bridge-greece", selectors: ["path.Greece"],            focus: { fx: 0.43, fy: 0.75 }, zoom: 5.5, showMarker: false },
+    { id: "berlin", label: "Berlín",           year: "1936",     sectionId: "scene-berlin", panelId: "panel-berlin", bridgeId: "bridge-berlin", selectors: ["#DE"],                     focus: { fx: 0.68, fy: 0.30 }, zoom: 5.0 },
+    { id: "tokyo",  label: "Tokio",            year: "1964",     sectionId: "scene-tokyo",  panelId: "panel-tokyo",  bridgeId: "bridge-tokyo",  selectors: ["path.Japan"],              focus: { fx: 0.85, fy: 0.55 }, zoom: 5.5 },
+    { id: "mexico", label: "Ciudad de México", year: "1968",     sectionId: "scene-mexico", panelId: "panel-mexico", bridgeId: "bridge-mexico", selectors: ["#MX"],                     focus: { fx: 0.60, fy: 0.79 }, zoom: 4.0 },
+    { id: "moscow", label: "Moscú",            year: "1980",     sectionId: "scene-moscow", panelId: "panel-moscow", bridgeId: "bridge-moscow", selectors: ["path.Russian.Federation"], focus: { fx: 0.13, fy: 0.51 }, zoom: 3.5 },
+    { id: "la",     label: "Los Ángeles",      year: "1984",     sectionId: "scene-la",     panelId: "panel-la",     bridgeId: "bridge-la",     selectors: ["path.United.States"],      focus: { fx: 0.05, fy: 0.63 }, zoom: 3.5 },
+    { id: "seoul",  label: "Seúl",             year: "1988",     sectionId: "scene-seoul",  panelId: "panel-seoul",  bridgeId: "bridge-seoul",  selectors: ["#KR"],                     focus: { fx: 0.40, fy: 0.20 }, zoom: 7.0 },
+    { id: "beijing",label: "Pekín",            year: "2008",     sectionId: "scene-beijing",panelId: "panel-beijing",bridgeId: "bridge-beijing",selectors: ["path.China"],              focus: { fx: 0.78, fy: 0.40 }, zoom: 4.5 },
+    { id: "sochi",  label: "Sochi",            year: "2014",     sectionId: "scene-sochi",  panelId: "panel-sochi",  bridgeId: "bridge-sochi",  selectors: ["path.Russian.Federation"], focus: { fx: 0.13, fy: 0.92 }, zoom: 6.0 },
+    { id: "paris",  label: "París",            year: "2024",     sectionId: "scene-paris",  panelId: "panel-paris",  bridgeId: null,            selectors: ["path.France"],             focus: { fx: 0.68, fy: 0.38 }, zoom: 6.0 },
   ];
 
   function vbStr(vb) { return `${vb.x} ${vb.y} ${vb.w} ${vb.h}`; }
@@ -244,7 +244,7 @@
       SCENES.forEach((scene) => { buildZoomIn(svg, scene); buildBridge(svg, scene); });
       setupPanels(svg);
       setupGreecePanel();
-      setupRevealBlocks(); 
+      setupRevealBlocks();  // activa .gr-reveal en todos los paneles
       window.addEventListener("resize", () => ScrollTrigger.refresh());
       ScrollTrigger.refresh();
     })
@@ -252,6 +252,10 @@
 
   // ---------------------------------------------------------------------------
   // 7) GREECE PANEL
+  //
+  //  El panel (imagen + contenido) es un solo componente.
+  //  Crossfade al final del scene: mapa opacity 0 → panel opacity 1.
+  //  Una vez visible, scroll 100% normal. Sin capas extra.
   // ---------------------------------------------------------------------------
   function setupGreecePanel() {
     const panel   = document.getElementById("panel-greece");
@@ -298,11 +302,12 @@
     });
   }
   // ---------------------------------------------------------------------------
-  // 8) REVEAL GLOBAL 
+  // 8) REVEAL GLOBAL — activa .gr-reveal en cualquier panel que lo use
+  //    Berlín, Tokio, etc. heredan la misma lógica sin código extra.
   // ---------------------------------------------------------------------------
   function setupRevealBlocks() {
     document.querySelectorAll(".gr-reveal").forEach((block, i) => {
-      
+      // Evitar duplicar triggers en bloques de Grecia (ya los maneja setupGreecePanel)
       if (block.closest("#panel-greece")) return;
       ScrollTrigger.create({
         trigger:  block,
