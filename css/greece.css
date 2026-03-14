@@ -316,3 +316,8 @@
   0%, 100% { transform: translateY(0);    opacity: 0.4; }
   50%       { transform: translateY(8px); opacity: 0.9; }
 }
+
+/* Bloque de texto sin imagen — ocupa el ancho completo del contenedor */
+.gr-reveal > .gr-entry__text {
+  width: 100%;
+}
